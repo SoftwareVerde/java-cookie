@@ -30,6 +30,11 @@ public class Cookie {
         return _dateFormat.format(new Date(expirationTime));
     }
 
+    public static String sanitizeValue(final String value) {
+        // Strip CTLs, whitespace, double quotes, comma, semicolon, and backslash...
+        return value.replaceAll("[\\x00-\\x1F\\x7F \t\",;\\\\]", "");
+    }
+
     protected String _key;
     protected String _value;
     protected String _expirationDate;
@@ -57,7 +62,7 @@ public class Cookie {
     public Boolean isSameSiteStrict() { return _isSameSiteStrict; }
 
     public void setKey(final String key) { _key = key; }
-    public void setValue(final String value) { _value = value; }
+    public void setValue(final String value) { _value = sanitizeValue(value); }
     public void setExpirationDate(final Long expirationDate) {
         _expirationDate = formatExpirationDate(expirationDate);
     }

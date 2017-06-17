@@ -143,6 +143,9 @@ public class CookieParser {
         return cookies;
     }
 
+    /**
+     * Parses the value of a Cookie header.
+     */
     public List<Cookie> parseFromCookieHeader(final String cookieHeaderValue) {
         final List<Cookie> cookies = new ArrayList<Cookie>();
 
@@ -161,5 +164,21 @@ public class CookieParser {
         }
 
         return cookies;
+    }
+
+    public List<String> compileCookiesIntoSetCookieHeaderValues(final List<Cookie> cookies) {
+        final List<String> setCookieHeaderValues = new ArrayList<String>();
+
+        for (final Cookie cookie : cookies) {
+            final StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.append(cookie.getKey());
+            stringBuilder.append("=");
+            stringBuilder.append(cookie.getValue());
+
+            setCookieHeaderValues.add(stringBuilder.toString());
+        }
+
+        return setCookieHeaderValues;
     }
 }
