@@ -176,6 +176,46 @@ public class CookieParser {
             stringBuilder.append("=");
             stringBuilder.append(cookie.getValue());
 
+            final String expiresDateString = cookie.getExpirationDate();
+            if (expiresDateString != null) {
+                final String cookieExpiresValue = Cookie.formatExpirationDate(Cookie.parseExpirationDate(expiresDateString));
+                stringBuilder.append("; Expires=");
+                stringBuilder.append(cookieExpiresValue);
+            }
+
+            final Integer maxAge = cookie.getMaxAge();
+            if (maxAge != null) {
+                stringBuilder.append("; Max-Age=");
+                stringBuilder.append(maxAge);
+            }
+
+            final String domain = cookie.getDomain();
+            if (domain != null) {
+                stringBuilder.append("; Domain=");
+                stringBuilder.append(domain);
+            }
+
+            final String path = cookie.getPath();
+            if (path != null) {
+                stringBuilder.append("; Path=");
+                stringBuilder.append(path);
+            }
+
+            final Boolean isSecure = cookie.isSecure();
+            if (isSecure) {
+                stringBuilder.append("; Secure");
+            }
+
+            final Boolean isHttpOnly = cookie.isHttpOnly();
+            if (isHttpOnly) {
+                stringBuilder.append("; HttpOnly");
+            }
+
+            final Boolean isSameSiteStrict = cookie.isSameSiteStrict();
+            if (isSameSiteStrict != null) {
+                stringBuilder.append("; SameSite="+ (isSameSiteStrict ? "Strict" : "Lax"));
+            }
+
             setCookieHeaderValues.add(stringBuilder.toString());
         }
 
