@@ -5,14 +5,14 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class CookieParserTests {
+public class SetCookieHeaderParserTests {
     @Test
     public void should_parse_empty_header() {
         // Setup
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final List<Cookie> cookies = cookieParser.parseFromHeader("");
+        final List<Cookie> cookies = cookieParser.parseFromSetCookieHeader("");
 
         // Assert
         Assert.assertEquals(true, cookies.isEmpty());
@@ -24,7 +24,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=value").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=value").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -37,7 +37,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("cookie-name=value").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("cookie-name=value").get(0);
 
         // Assert
         Assert.assertEquals("cookie-name", cookie.getKey());
@@ -50,7 +50,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -63,7 +63,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=;").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=;").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -76,7 +76,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key= ;").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key= ;").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -89,7 +89,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key = ").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key = ").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -102,7 +102,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key = ; Secure; HttpOnly").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key = ; Secure; HttpOnly").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -115,7 +115,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=\"value\"").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=\"value\"").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -128,7 +128,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=\" value \"").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=\" value \"").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -141,7 +141,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=\"test value\"").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=\"test value\"").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -154,7 +154,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=\"; ").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=\"; ").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -167,7 +167,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=\"_").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=\"_").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -180,7 +180,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=value; Expires=Wed, 21 Oct 2015 07:28:00 GMT").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=value; Expires=Wed, 21 Oct 2015 07:28:00 GMT").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -194,7 +194,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=value; Expires=2000-01-01; Secure; HttpOnly").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=value; Expires=2000-01-01; Secure; HttpOnly").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -208,7 +208,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=value;Expires=Sat, 1 Jan 2000 00:00:00 GMT;Max-Age= 60;Domain=softwareverde.com;Path=/;Secure;HttpOnly;SameSite=Strict").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=value;Expires=Sat, 1 Jan 2000 00:00:00 GMT;Max-Age= 60;Domain=softwareverde.com;Path=/;Secure;HttpOnly;SameSite=Strict").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -228,7 +228,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=value; SameSite=Strict;Max-Age= 60; HttpOnly; Secure; Expires=Sat, 1 Jan 2000 00:00:00 GMT; Domain=softwareverde.com; Path=/").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=value; SameSite=Strict;Max-Age= 60; HttpOnly; Secure; Expires=Sat, 1 Jan 2000 00:00:00 GMT; Domain=softwareverde.com; Path=/").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -248,7 +248,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=value; Expires=Sat, 1 Jan 2000 00:00:00 GMT; Max-Age= 60; Domain=softwareverde.com; Path=/; Secure; HttpOnly; SameSite=Strict").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=value; Expires=Sat, 1 Jan 2000 00:00:00 GMT; Max-Age= 60; Domain=softwareverde.com; Path=/; Secure; HttpOnly; SameSite=Strict").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -268,7 +268,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=value; Expires=; Secure; Domain=").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=value; Expires=; Secure; Domain=").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -288,7 +288,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=value; SameSite=Lax").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=value; SameSite=Lax").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -308,7 +308,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=value").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=value").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -328,7 +328,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=value; Max-Age: 60; Domain: softwareverde.com s;dfusdlfdsfdf987yrhj231;").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=value; Max-Age: 60; Domain: softwareverde.com s;dfusdlfdsfdf987yrhj231;").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -348,7 +348,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final List<Cookie> cookies = cookieParser.parseFromHeader(",,,,,,,,,,,,,,");
+        final List<Cookie> cookies = cookieParser.parseFromSetCookieHeader(",,,,,,,,,,,,,,");
 
         // Assert
         Assert.assertEquals(true, cookies.isEmpty());
@@ -360,7 +360,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final List<Cookie> cookies = cookieParser.parseFromHeader("key=value,,,,,,,,,,,,,,,");
+        final List<Cookie> cookies = cookieParser.parseFromSetCookieHeader("key=value,,,,,,,,,,,,,,,");
 
         // Assert
         Assert.assertEquals(1, cookies.size());
@@ -376,7 +376,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final List<Cookie> cookies = cookieParser.parseFromHeader("invalid: sYntAx %823042: @%^#$*&^%$");
+        final List<Cookie> cookies = cookieParser.parseFromSetCookieHeader("invalid: sYntAx %823042: @%^#$*&^%$");
 
         // Assert
         Assert.assertEquals(true, cookies.isEmpty());
@@ -388,7 +388,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=value; Expires=").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=value; Expires=").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -408,7 +408,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=value; SameSite").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=value; SameSite").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -428,7 +428,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie cookie = cookieParser.parseFromHeader("key=value; SameSite=").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader("key=value; SameSite=").get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -448,8 +448,8 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final Cookie sourceCookie = cookieParser.parseFromHeader("key=value; Expires=Sat, 1 Jan 2000 00:00:00 GMT; Max-Age= 60; Domain=softwareverde.com; Path=/; Secure; HttpOnly; SameSite=Strict").get(0);
-        final Cookie cookie = cookieParser.parseFromHeader(sourceCookie.toString()).get(0);
+        final Cookie sourceCookie = cookieParser.parseFromSetCookieHeader("key=value; Expires=Sat, 1 Jan 2000 00:00:00 GMT; Max-Age= 60; Domain=softwareverde.com; Path=/; Secure; HttpOnly; SameSite=Strict").get(0);
+        final Cookie cookie = cookieParser.parseFromSetCookieHeader(sourceCookie.toString()).get(0);
 
         // Assert
         Assert.assertEquals("key", cookie.getKey());
@@ -469,7 +469,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final List<Cookie> cookies = cookieParser.parseFromHeader("qwerty=219ffwef9w0f; Domain=somecompany.co.uk; Path=/; Expires=Wed, 30 Aug 2019 00:00:00 GMT, key=value; Expires=Sat, 1 Jan 2000 00:00:00 GMT; Max-Age= 60; Domain=softwareverde.com; Path=/; Secure; HttpOnly; SameSite=Strict");
+        final List<Cookie> cookies = cookieParser.parseFromSetCookieHeader("qwerty=219ffwef9w0f; Domain=somecompany.co.uk; Path=/; Expires=Wed, 30 Aug 2019 00:00:00 GMT, key=value; Expires=Sat, 1 Jan 2000 00:00:00 GMT; Max-Age= 60; Domain=softwareverde.com; Path=/; Secure; HttpOnly; SameSite=Strict");
 
         // Assert
         Assert.assertEquals(2, cookies.size());
@@ -503,7 +503,7 @@ public class CookieParserTests {
         final CookieParser cookieParser = new CookieParser();
 
         // Action
-        final List<Cookie> cookies = cookieParser.parseFromHeader("key1=value1; Secure; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Path=/, key2=value2; Secure; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Path=/");
+        final List<Cookie> cookies = cookieParser.parseFromSetCookieHeader("key1=value1; Secure; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Path=/, key2=value2; Secure; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Path=/");
 
         // Assert
         final Cookie cookie0 = cookies.get(0);

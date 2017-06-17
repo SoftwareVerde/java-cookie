@@ -117,7 +117,7 @@ public class CookieParser {
      * Parses the value of a Set-Cookie header.
      *  Accounts for Set-Cookie headers squashed into a single header delimited by commas.
      */
-    public List<Cookie> parseFromHeader(final String setCookieHeaderValue) {
+    public List<Cookie> parseFromSetCookieHeader(final String setCookieHeaderValue) {
         final List<Cookie> cookies = new ArrayList<Cookie>();
 
         String previousCookiePart = "";
@@ -138,6 +138,26 @@ public class CookieParser {
             }
 
             previousCookiePart = "";
+        }
+
+        return cookies;
+    }
+
+    public List<Cookie> parseFromCookieHeader(final String cookieHeaderValue) {
+        final List<Cookie> cookies = new ArrayList<Cookie>();
+
+        for (final String keyValuePair : cookieHeaderValue.split(";")) {
+            final Integer indexOfEqualsCharacter = keyValuePair.indexOf("=");
+            if (indexOfEqualsCharacter < 0) { continue; }
+
+            final Integer lengthOfKeyValuePair = keyValuePair.length();
+
+            final String key = keyValuePair.substring(0, indexOfEqualsCharacter).trim();
+            final String value = keyValuePair.substring(Math.min(indexOfEqualsCharacter+1, lengthOfKeyValuePair), lengthOfKeyValuePair).trim();
+
+            if (key.isEmpty()) { continue; }
+
+            cookies.add(new Cookie(key, value));
         }
 
         return cookies;

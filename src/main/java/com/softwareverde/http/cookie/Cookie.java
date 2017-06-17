@@ -40,6 +40,12 @@ public class Cookie {
     protected Boolean _isHttpOnly = true;
     protected Boolean _isSameSiteStrict = true;
 
+    public Cookie() { }
+    public Cookie(final String key, final String value) {
+        _key = key;
+        _value = value;
+    }
+
     public String getKey() { return _key; }
     public String getValue() { return _value; }
     public String getExpirationDate() { return _expirationDate; }
