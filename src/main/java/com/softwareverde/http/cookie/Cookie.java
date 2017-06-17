@@ -12,7 +12,7 @@ import java.util.TimeZone;
  * Cookie Class as defined by: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
  */
 public class Cookie {
-    protected static final DateFormat _dateFormat = new SimpleDateFormat("EEE, dd-MMM-yyyy HH:mm:ss zzz");
+    protected static final DateFormat _dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
     static {
         _dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
     }
